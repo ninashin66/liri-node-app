@@ -4,8 +4,6 @@ var axios = require("axios");
 var spotify = require("node-spotify-api");
 var moment = require("moment");
 
-var spotify = new Spotify(keys.spotify);
-
 var command = process.argv(2).slice(2);
 var userQ = process
   .argv(3)
@@ -53,4 +51,16 @@ function concertThis(userQ) {
           moment(response.eventdata.datetime, ["MM-DD-YYYY", moment.ISO_8601])
       );
     });
+}
+
+function spotifySong(userQ) {
+  var spotify = new Spotify(keys.spotify);
+
+  spotify.search({ type: "track", query: userQ }, function(err, data) {
+    if (err) {
+      return console.log("Error occurred: " + err);
+    } else {
+      console.log(data);
+    }
+  });
 }
