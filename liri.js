@@ -64,3 +64,39 @@ function spotifySong(userQ) {
     }
   });
 }
+
+function movieThis(userQ) {
+  if (!userQ) {
+    userQ = "Mr+Nobody";
+  }
+
+  axios
+    .get("http://www.omdbapi.com/?t=" + userQ + "&apikey=trilogy")
+    .then(function(response) {
+      console.log(
+        "Title " +
+          response.data.title +
+          "\n" +
+          "Year Released: " +
+          response.data.year +
+          "\n" +
+          "IMBD Rating: " +
+          response.data.imdbRating +
+          "\n" +
+          "Rotten Tomatoes Rating: " +
+          response.data.ratings[1].Value +
+          "\n" +
+          "Country: " +
+          response.data.Country +
+          "\n" +
+          "Language: " +
+          response.data.Language +
+          "\n" +
+          "Plot: " +
+          response.data.Plot +
+          "\n" +
+          "Actors: " +
+          response.data.Actors
+      );
+    });
+}
